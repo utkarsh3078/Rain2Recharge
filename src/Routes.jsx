@@ -17,12 +17,15 @@ const Routes = () => {
         <ScrollToTop />
         <RouterRoutes>
           {/* Define your route here */}
-          <Route path="/" element={<AIAssistantWaterBuddyInterface />} />
+          <Route
+            path="/user-profile-progress-tracking"
+            element={<AIAssistantWaterBuddyInterface />}
+          />
           <Route
             path="/user-profile-progress-tracking"
             element={<UserProfileProgressTracking />}
           />
-          <Route path="/homepage-smart-water-platform" element={<Homepage />} />
+          <Route path="/" element={<Homepage />} />
           <Route
             path="/detailed-report-recommendations"
             element={<DetailedReportRecommendations />}
