@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import Icon from '../AppIcon';
-import Button from './Button';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Icon from "../AppIcon";
+import Button from "./Button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,54 +13,54 @@ const Header = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navigationItems = [
     {
-      name: 'Home',
-      path: '/homepage-smart-water-platform',
-      icon: 'Home'
+      name: "Home",
+      path: "/",
+      icon: "Home",
     },
     {
-      name: 'Assessment',
-      path: '/assessment-dashboard-location-analysis',
-      icon: 'BarChart3'
+      name: "Assessment",
+      path: "/assessment-dashboard-location-analysis",
+      icon: "BarChart3",
     },
     {
-      name: 'Reports',
-      path: '/detailed-report-recommendations',
-      icon: 'FileText'
+      name: "Reports",
+      path: "/detailed-report-recommendations",
+      icon: "FileText",
     },
     {
-      name: 'AI Assistant',
-      path: '/ai-assistant-water-buddy-interface',
-      icon: 'Bot'
+      name: "AI Assistant",
+      path: "/ai-assistant-water-buddy-interface",
+      icon: "Bot",
     },
     {
-      name: 'Marketplace',
-      path: '/solution-marketplace-vendor-directory',
-      icon: 'Store'
-    }
+      name: "Marketplace",
+      path: "/solution-marketplace-vendor-directory",
+      icon: "Store",
+    },
   ];
 
   const moreMenuItems = [
     {
-      name: 'Profile',
-      path: '/user-profile-progress-tracking',
-      icon: 'User'
+      name: "Profile",
+      path: "/user-profile-progress-tracking",
+      icon: "User",
     },
     {
-      name: 'Settings',
-      path: '/settings',
-      icon: 'Settings'
+      name: "Settings",
+      path: "/settings",
+      icon: "Settings",
     },
     {
-      name: 'Help',
-      path: '/help',
-      icon: 'HelpCircle'
-    }
+      name: "Help",
+      path: "/help",
+      icon: "HelpCircle",
+    },
   ];
 
   const isActivePath = (path) => {
@@ -68,7 +68,7 @@ const Header = () => {
   };
 
   const Logo = () => (
-    <Link to="/homepage-smart-water-platform" className="flex items-center space-x-3 group">
+    <Link to="/" className="flex items-center space-x-3 group">
       <div className="relative">
         <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-brand transition-all duration-300 group-hover:shadow-brand-lg group-hover:scale-105">
           <Icon name="Droplets" size={24} color="white" strokeWidth={2.5} />
@@ -89,11 +89,13 @@ const Header = () => {
   );
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-brand shadow-soft border-b border-border' 
-        : 'bg-white/80 backdrop-blur-sm'
-    }`}>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/95 backdrop-blur-brand shadow-soft border-b border-border"
+          : "bg-white/80 backdrop-blur-sm"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -109,14 +111,16 @@ const Header = () => {
                 to={item?.path}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   isActivePath(item?.path)
-                    ? 'bg-primary text-primary-foreground shadow-brand'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-hover'
+                    ? "bg-primary text-primary-foreground shadow-brand"
+                    : "text-text-secondary hover:text-text-primary hover:bg-hover"
                 }`}
               >
-                <Icon 
-                  name={item?.icon} 
-                  size={18} 
-                  color={isActivePath(item?.path) ? 'currentColor' : 'currentColor'} 
+                <Icon
+                  name={item?.icon}
+                  size={18}
+                  color={
+                    isActivePath(item?.path) ? "currentColor" : "currentColor"
+                  }
                 />
                 <span>{item?.name}</span>
               </Link>
@@ -128,7 +132,7 @@ const Header = () => {
                 <Icon name="MoreHorizontal" size={18} />
                 <span>More</span>
               </button>
-              
+
               <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-elevation border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
                 <div className="py-2">
                   {moreMenuItems?.map((item) => (
@@ -137,7 +141,8 @@ const Header = () => {
                       to={item?.path}
                       className={`flex items-center space-x-3 px-4 py-2 text-sm transition-colors duration-200 ${
                         isActivePath(item?.path)
-                          ? 'text-primary bg-primary/5' :'text-text-secondary hover:text-text-primary hover:bg-hover'
+                          ? "text-primary bg-primary/5"
+                          : "text-text-secondary hover:text-text-primary hover:bg-hover"
                       }`}
                     >
                       <Icon name={item?.icon} size={16} />
@@ -181,20 +186,29 @@ const Header = () => {
                   onClick={() => setIsMenuOpen(false)}
                   className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
                     isActivePath(item?.path)
-                      ? 'bg-primary text-primary-foreground shadow-brand'
-                      : 'text-text-secondary hover:text-text-primary hover:bg-hover'
+                      ? "bg-primary text-primary-foreground shadow-brand"
+                      : "text-text-secondary hover:text-text-primary hover:bg-hover"
                   }`}
                 >
                   <Icon name={item?.icon} size={18} />
                   <span>{item?.name}</span>
                 </Link>
               ))}
-              
+
               <div className="pt-4 border-t border-border space-y-2">
-                <Button variant="outline" fullWidth onClick={() => setIsMenuOpen(false)}>
+                <Button
+                  variant="outline"
+                  fullWidth
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Sign In
                 </Button>
-                <Button variant="default" fullWidth className="gradient-primary" onClick={() => setIsMenuOpen(false)}>
+                <Button
+                  variant="default"
+                  fullWidth
+                  className="gradient-primary"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   Start Assessment
                 </Button>
               </div>
