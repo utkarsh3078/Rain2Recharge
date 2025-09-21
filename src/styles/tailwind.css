@@ -1,0 +1,196 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core System Colors */
+    --color-background: #fafafa; /* gray-50 */
+    --color-foreground: #1f2937; /* gray-800 */
+    --color-border: #e5e7eb; /* gray-200 */
+    --color-input: #ffffff; /* white */
+    --color-ring: #2563eb; /* blue-600 */
+
+    /* Card & Surface Colors */
+    --color-card: #ffffff;
+    --color-card-foreground: #1f2937;
+    --color-popover: #ffffff;
+    --color-popover-foreground: #1f2937;
+
+    /* Muted Colors */
+    --color-muted: #f1f5f9; /* slate-100 */
+    --color-muted-foreground: #64748b; /* slate-500 */
+
+    /* Brand Colors */
+    --color-primary: #2563eb; /* blue-600 */
+    --color-primary-foreground: #ffffff;
+
+    --color-secondary: #10b981; /* emerald-500 */
+    --color-secondary-foreground: #ffffff;
+
+    --color-accent: #14b8a6; /* teal-500 */
+    --color-accent-foreground: #ffffff;
+
+    /* Status Colors */
+    --color-success: #059669; /* emerald-600 */
+    --color-success-foreground: #ffffff;
+
+    --color-warning: #d97706; /* amber-600 */
+    --color-warning-foreground: #ffffff;
+
+    --color-error: #dc2626; /* red-600 */
+    --color-error-foreground: #ffffff;
+
+    --color-destructive: #dc2626; /* red-600 */
+    --color-destructive-foreground: #ffffff;
+
+    /* Text Colors */
+    --color-text-primary: #1e293b; /* slate-800 */
+    --color-text-secondary: #64748b; /* slate-500 */
+
+    /* UI States */
+    --color-hover: #f8fafc; /* slate-50 */
+    --color-active: #e2e8f0; /* slate-200 */
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #14b8a6 100%);
+    --gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Animations */
+    --timing-fast: 200ms;
+    --timing-normal: 300ms;
+    --timing-slow: 500ms;
+    --timing-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Border Radius */
+    --radius: 0.5rem;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-primary;
+    font-family: "Inter", sans-serif;
+  }
+
+  p,
+  span,
+  div {
+    @apply text-primary;
+  }
+
+  .text-muted {
+    @apply text-secondary;
+  }
+}
+
+@layer components {
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+}
+
+/* Animations */
+@keyframes pulse-gentle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes flow {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-pulse-gentle {
+  animation: pulse-gentle 3s ease-in-out infinite;
+}
+
+.animate-flow {
+  animation: flow 2s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* Utility Classes */
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-secondary {
+  background: var(--gradient-secondary);
+}
+
+.shadow-brand {
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+}
+
+.shadow-brand-lg {
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+}
+
+.backdrop-blur-brand {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-accent);
+}
