@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Icon from "../AppIcon";
+import Image from "../AppImage";
 import Button from "./Button";
+import LogoImg from '..//../assets/logo.jpeg';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,11 +40,11 @@ const Header = () => {
       path: "/ai-assistant-water-buddy-interface",
       icon: "Bot",
     },
-    {
-      name: "Marketplace",
-      path: "/solution-marketplace-vendor-directory",
-      icon: "Store",
-    },
+    // {
+    //   name: "Marketplace",
+    //   path: "/solution-marketplace-vendor-directory",
+    //   icon: "Store",
+    // },
   ];
 
   const moreMenuItems = [
@@ -70,21 +72,26 @@ const Header = () => {
   const Logo = () => (
     <Link to="/" className="flex items-center space-x-3 group">
       <div className="relative">
-        <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-brand transition-all duration-300 group-hover:shadow-brand-lg group-hover:scale-105">
-          <Icon name="Droplets" size={24} color="white" strokeWidth={2.5} />
+        <div className="w-39 h-15 bg-gradient-primary rounded-xl flex items-center justify-center shadow-brand transition-all duration-300 group-hover:shadow-brand-lg group-hover:scale-105">
+      {/* Replace the src below with your photo. Options:
+        1) Put your image in `public/assets/logo.png` and use `/assets/logo.png` as the src.
+        2) Put your image in `src/assets/` and import it at the top, e.g.
+         `import LogoImg from '../../assets/logo.png'` then use `src={LogoImg}`.
+        Example uses the existing `react.svg` placeholder. */}
+      <Image src={LogoImg} alt="Rain2Recharge logo" className="w-39 h-14" />
         </div>
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-secondary rounded-full flex items-center justify-center">
-          <Icon name="Zap" size={10} color="white" strokeWidth={3} />
-        </div>
+        {/* <div className="absolute -top-1 -right-1 w-4 h-4 bg-secondary rounded-full flex items-center justify-center">
+          <Icon name="Zap" size={10} color="white" strokeWidth={3} /> 
+        </div> */}
       </div>
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <span className="text-xl font-bold text-text-primary tracking-tight">
           Rain2Recharge
         </span>
         <span className="text-xs text-text-secondary font-medium -mt-1">
           Smart Water Solutions
         </span>
-      </div>
+      </div> */}
     </Link>
   );
 
