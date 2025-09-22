@@ -154,7 +154,7 @@ const Footer = () => {
                 Stay Updated on Water Innovation
               </h3>
               <p className="text-slate-300">
-                Get monthly insights, success stories, and the latest in water sustainability technology.
+                Get monthly insights, success stories, and the latest in water sustainability technology here.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
