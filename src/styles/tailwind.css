@@ -48,8 +48,8 @@
     --color-destructive-foreground: #ffffff;
 
     /* Text Colors */
-    --color-text-primary: #1e293b; /* slate-800 */
-    --color-text-secondary: #64748b; /* slate-500 */
+    --color-text-primary: black; /* slate-800 */
+    --color-text-secondary: #040506; /* slate-500 */
 
     /* UI States */
     --color-hover: #f8fafc; /* slate-50 */
@@ -93,8 +93,6 @@
     font-family: "Inter", sans-serif;
   }
 
-  p,
-  span,
   div {
     @apply text-primary;
   }

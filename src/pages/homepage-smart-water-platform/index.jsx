@@ -36,7 +36,7 @@ const Homepage = () => {
       
       <main className="pt-16">
         <HeroSection />
-        <ImpactMetrics />
+        {/* <ImpactMetrics /> */}
         <AssessmentLauncher />
         <SuccessStories />
         <InteractiveInfographics />

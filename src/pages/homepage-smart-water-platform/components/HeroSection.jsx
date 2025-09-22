@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+// import water from 
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -140,11 +141,12 @@ const HeroSection = () => {
 
             {/* Floating Elements */}
             <div className="absolute -top-4 -right-4 w-20 h-20 bg-white rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle">
-              <Icon name="Droplets" size={32} color="var(--color-primary)" />
+              {/* <Image src={water} alt="Rain2Recharge logo" className="" /> */}
+              <Icon name="Droplets" size={48} color="var(--color-primary)" />
             </div>
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle" style={{ animationDelay: '1s' }}>
+            {/* <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle" style={{ animationDelay: '1s' }}>
               <Icon name="Leaf" size={24} color="white" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
