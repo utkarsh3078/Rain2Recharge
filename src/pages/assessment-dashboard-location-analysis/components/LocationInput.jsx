@@ -1,55 +1,118 @@
-import React, { useState, useEffect } from 'react';
-import Icon from '../../../components/AppIcon';
-import Button from '../../../components/ui/Button';
-import Input from '../../../components/ui/Input';
+import React, { useState, useEffect } from "react";
+import Icon from "../../../components/AppIcon";
+import Button from "../../../components/ui/Button";
+import Input from "../../../components/ui/Input";
+import { reverseGeocode, searchAddresses } from "../../../utils/geocoding";
 
 const LocationInput = ({ onLocationSelect, selectedLocation }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [isUsingGPS, setIsUsingGPS] = useState(false);
   const [showPrivacyMessage, setShowPrivacyMessage] = useState(false);
+  const [locationError, setLocationError] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
-  const mockLocations = [
-    {
-      id: 1,
-      address: "123 Oak Street, Austin, TX 78701",
-      coordinates: { lat: 30.2672, lng: -97.7431 },
-      type: "residential"
-    },
-    {
-      id: 2,
-      address: "456 Pine Avenue, Austin, TX 78702",
-      coordinates: { lat: 30.2849, lng: -97.7341 },
-      type: "residential"
-    },
-    {
-      id: 3,
-      address: "789 Maple Drive, Austin, TX 78703",
-      coordinates: { lat: 30.2711, lng: -97.7494 },
-      type: "residential"
+  // Handle address search with debouncing
+  const handleAddressSearch = async (query) => {
+    if (!query.trim()) {
+      setSearchResults([]);
+      return;
     }
-  ];
+
+    try {
+      const results = await searchAddresses(query);
+      setSearchResults(results);
+    } catch (error) {
+      console.error("Address search failed:", error);
+      setSearchResults([]);
+    }
+  };
 
   const handleGPSLocation = () => {
     setIsUsingGPS(true);
     setShowPrivacyMessage(true);
-    
-    // Mock GPS detection
-    setTimeout(() => {
-      const mockGPSLocation = {
-        id: 'gps',
-        address: "Current Location - 321 Cedar Lane, Austin, TX 78704",
-        coordinates: { lat: 30.2500, lng: -97.7500 },
-        type: "current"
-      };
-      onLocationSelect(mockGPSLocation);
+    setLocationError(null);
+
+    // Check if geolocation is supported
+    if (!navigator.geolocation) {
+      setLocationError("Geolocation is not supported by this browser.");
       setIsUsingGPS(false);
       setShowPrivacyMessage(false);
-    }, 2000);
+      return;
+    }
+
+    // Get current position
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+
+        try {
+          // Get address from coordinates
+          const address = await reverseGeocode(latitude, longitude);
+
+          const currentLocation = {
+            id: "gps",
+            address: `Current Location - ${address}`,
+            coordinates: { lat: latitude, lng: longitude },
+            type: "current",
+            accuracy: position.coords.accuracy,
+          };
+
+          onLocationSelect(currentLocation);
+        } catch (error) {
+          console.error("Error processing location:", error);
+          // Still provide coordinates even if reverse geocoding fails
+          const currentLocation = {
+            id: "gps",
+            address: `Current Location - ${latitude.toFixed(
+              6
+            )}, ${longitude.toFixed(6)}`,
+            coordinates: { lat: latitude, lng: longitude },
+            type: "current",
+          };
+          onLocationSelect(currentLocation);
+        }
+
+        setIsUsingGPS(false);
+        setShowPrivacyMessage(false);
+      },
+      (error) => {
+        let errorMessage = "Unable to get your location. ";
+
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage += "Location access was denied.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage += "Location information is unavailable.";
+            break;
+          case error.TIMEOUT:
+            errorMessage += "Location request timed out.";
+            break;
+          default:
+            errorMessage += "An unknown error occurred.";
+            break;
+        }
+
+        setLocationError(errorMessage);
+        setIsUsingGPS(false);
+        setShowPrivacyMessage(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 300000, // 5 minutes
+      }
+    );
   };
 
-  const filteredLocations = mockLocations?.filter(location =>
-    location?.address?.toLowerCase()?.includes(searchQuery?.toLowerCase())
-  );
+  // Debounced search effect
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      handleAddressSearch(searchQuery);
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery]);
 
   return (
     <div className="bg-white rounded-xl shadow-soft border border-border p-6">
@@ -58,8 +121,12 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
           <Icon name="MapPin" size={20} color="var(--color-primary)" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-text-primary">Location Input</h3>
-          <p className="text-sm text-text-secondary">Find your property to begin assessment</p>
+          <h3 className="text-lg font-semibold text-text-primary">
+            Location Input
+          </h3>
+          <p className="text-sm text-text-secondary">
+            Find your property to begin assessment
+          </p>
         </div>
       </div>
       {/* Search Input */}
@@ -83,41 +150,91 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
           iconName="Navigation"
           iconPosition="left"
         >
-          {isUsingGPS ? 'Detecting Location...' : 'Use Current Location'}
+          {isUsingGPS ? "Detecting Location..." : "Use Current Location"}
         </Button>
 
         {/* Privacy Message */}
         {showPrivacyMessage && (
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
             <div className="flex items-start space-x-2">
-              <Icon name="Shield" size={16} color="var(--color-primary)" className="mt-0.5" />
+              <Icon
+                name="Shield"
+                size={16}
+                color="var(--color-primary)"
+                className="mt-0.5"
+              />
               <div className="text-sm">
                 <p className="text-blue-800 font-medium">Privacy Protected</p>
-                <p className="text-blue-600">Your location data is encrypted and never shared with third parties.</p>
+                <p className="text-blue-600">
+                  Your location data is encrypted and never shared with third
+                  parties.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Location Error */}
+        {locationError && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+            <div className="flex items-start space-x-2">
+              <Icon
+                name="AlertTriangle"
+                size={16}
+                color="var(--color-error)"
+                className="mt-0.5"
+              />
+              <div className="text-sm">
+                <p className="text-red-800 font-medium">Location Error</p>
+                <p className="text-red-600">{locationError}</p>
               </div>
             </div>
           </div>
         )}
 
         {/* Search Results */}
-        {searchQuery && (
+        {searchQuery && searchResults.length > 0 && (
           <div className="space-y-2">
-            <p className="text-sm font-medium text-text-primary">Search Results</p>
-            {filteredLocations?.map((location) => (
+            <p className="text-sm font-medium text-text-primary">
+              Search Results
+            </p>
+            {searchResults.map((location) => (
               <button
                 key={location?.id}
                 onClick={() => onLocationSelect(location)}
                 className={`w-full text-left p-3 rounded-lg border transition-all duration-200 hover:border-primary hover:bg-primary/5 ${
                   selectedLocation?.id === location?.id
-                    ? 'border-primary bg-primary/5' :'border-border'
+                    ? "border-primary bg-primary/5"
+                    : "border-border"
                 }`}
               >
                 <div className="flex items-center space-x-3">
-                  <Icon name="MapPin" size={16} color="var(--color-text-secondary)" />
-                  <span className="text-sm text-text-primary">{location?.address}</span>
+                  <Icon
+                    name="MapPin"
+                    size={16}
+                    color="var(--color-text-secondary)"
+                  />
+                  <span className="text-sm text-text-primary">
+                    {location?.address}
+                  </span>
                 </div>
               </button>
             ))}
+          </div>
+        )}
+
+        {/* No Results */}
+        {searchQuery && searchResults.length === 0 && (
+          <div className="text-center py-4">
+            <Icon
+              name="Search"
+              size={24}
+              color="var(--color-text-secondary)"
+              className="mx-auto mb-2"
+            />
+            <p className="text-sm text-text-secondary">
+              No locations found for "{searchQuery}"
+            </p>
           </div>
         )}
 
@@ -129,8 +246,12 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
                 <Icon name="Check" size={16} color="var(--color-success)" />
               </div>
               <div>
-                <p className="text-sm font-medium text-green-800">Location Selected</p>
-                <p className="text-sm text-green-600">{selectedLocation?.address}</p>
+                <p className="text-sm font-medium text-green-800">
+                  Location Selected
+                </p>
+                <p className="text-sm text-green-600">
+                  {selectedLocation?.address}
+                </p>
               </div>
             </div>
           </div>
@@ -144,7 +265,11 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
           loading="lazy"
           title="Property Location Map"
           referrerPolicy="no-referrer-when-downgrade"
-          src={`https://www.google.com/maps?q=${selectedLocation?.coordinates?.lat || 30.2672},${selectedLocation?.coordinates?.lng || -97.7431}&z=15&output=embed`}
+          src={`https://www.google.com/maps?q=${
+            selectedLocation?.coordinates?.lat || 30.2672
+          },${
+            selectedLocation?.coordinates?.lng || -97.7431
+          }&z=15&output=embed`}
           className="w-full h-full"
         />
       </div>
