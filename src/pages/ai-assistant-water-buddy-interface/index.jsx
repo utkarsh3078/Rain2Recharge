@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet';
-import Header from '../../components/ui/Header';
-import Icon from '../../components/AppIcon';
-import Button from '../../components/ui/Button';
-import ChatMessage from './components/ChatMessage';
-import ConversationStarters from './components/ConversationStarters';
-import ChatInput from './components/ChatInput';
-import ConversationHistory from './components/ConversationHistory';
-import ProactiveAssistance from './components/ProactiveAssistance';
-import ExpertEscalation from './components/ExpertEscalation';
+import React, { useState, useEffect, useRef } from "react";
+import { Helmet } from "react-helmet";
+import Header from "../../components/ui/Header";
+import Icon from "../../components/AppIcon";
+import Button from "../../components/ui/Button";
+import ChatMessage from "./components/ChatMessage";
+import ConversationStarters from "./components/ConversationStarters";
+import ChatInput from "./components/ChatInput";
+import ConversationHistory from "./components/ConversationHistory";
+import ProactiveAssistance from "./components/ProactiveAssistance";
+import ExpertEscalation from "./components/ExpertEscalation";
+import { geminiService } from "../../services/geminiService";
 
 const AIAssistantWaterBuddyInterface = () => {
   const [messages, setMessages] = useState([]);
@@ -16,6 +17,13 @@ const AIAssistantWaterBuddyInterface = () => {
   const [currentConversationId, setCurrentConversationId] = useState(null);
   const [showExpertModal, setShowExpertModal] = useState(false);
   const [isVoiceActive, setIsVoiceActive] = useState(false);
+  const [error, setError] = useState(null);
+  const [userContext, setUserContext] = useState({
+    location: "Austin, Texas",
+    roofArea: "2,400 sq ft",
+    propertySize: "Residential",
+    currentSystem: "Municipal water only",
+  });
   const messagesEndRef = useRef(null);
 
   // Mock conversation history
@@ -23,11 +31,12 @@ const AIAssistantWaterBuddyInterface = () => {
     {
       id: 1,
       title: "Rainwater System Selection",
-      lastMessage: "Based on your roof area, I recommend a 5000-gallon system...",
+      lastMessage:
+        "Based on your roof area, I recommend a 5000-gallon system...",
       lastActivity: new Date(Date.now() - 86400000), // 1 day ago
       messageCount: 12,
       category: "guidance",
-      hasBookmarks: true
+      hasBookmarks: true,
     },
     {
       id: 2,
@@ -36,16 +45,17 @@ const AIAssistantWaterBuddyInterface = () => {
       lastActivity: new Date(Date.now() - 172800000), // 2 days ago
       messageCount: 8,
       category: "financial",
-      hasBookmarks: false
+      hasBookmarks: false,
     },
     {
       id: 3,
       title: "Local Installer Search",
-      lastMessage: "I found 5 certified installers within 25 miles of your location...",
+      lastMessage:
+        "I found 5 certified installers within 25 miles of your location...",
       lastActivity: new Date(Date.now() - 259200000), // 3 days ago
       messageCount: 6,
       category: "services",
-      hasBookmarks: true
+      hasBookmarks: true,
     },
     {
       id: 4,
@@ -54,8 +64,8 @@ const AIAssistantWaterBuddyInterface = () => {
       lastActivity: new Date(Date.now() - 604800000), // 1 week ago
       messageCount: 15,
       category: "maintenance",
-      hasBookmarks: false
-    }
+      hasBookmarks: false,
+    },
   ]);
 
   // Mock initial messages for demonstration
@@ -67,16 +77,21 @@ const AIAssistantWaterBuddyInterface = () => {
       timestamp: new Date(Date.now() - 300000),
       attachments: [
         {
-          type: 'calculator',
-          title: 'Quick ROI Calculator',
+          type: "calculator",
+          title: "Quick ROI Calculator",
           data: {
-            cost: '₹64,000 - ₹96,000',
-            savings: '₹9,600/year'
-          }
-        }
+            cost: "₹64,000 - ₹96,000",
+            savings: "₹9,600/year",
+          },
+        },
       ],
-      suggestions: ['System recommendations', 'Cost breakdown', 'Local incentives', 'Installation timeline']
-    }
+      suggestions: [
+        "System recommendations",
+        "Cost breakdown",
+        "Local incentives",
+        "Installation timeline",
+      ],
+    },
   ];
 
   useEffect(() => {
@@ -90,7 +105,7 @@ const AIAssistantWaterBuddyInterface = () => {
   }, [messages]);
 
   const scrollToBottom = () => {
-    messagesEndRef?.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSendMessage = async (messageText) => {
@@ -98,75 +113,80 @@ const AIAssistantWaterBuddyInterface = () => {
       id: Date.now(),
       message: messageText,
       isUser: true,
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setIsLoading(true);
-
-    // Simulate AI response
-    setTimeout(() => {
-      const aiResponse = generateAIResponse(messageText);
-      setMessages(prev => [...prev, aiResponse]);
-      setIsLoading(false);
-    }, 1500);
-  };
-
-  const generateAIResponse = (userMessage) => {
-    const responses = {
-      'help me choose a system': {
-        message: `Great! I'd be happy to help you choose the perfect rainwater harvesting system. Based on your property details, here are my recommendations:\n\n**For Your 2,400 sq ft Roof:**\n• **First Flush Diverter System** - Best for drinking water quality\n• **Modular Tank System** - Flexible capacity (2,000-8,000 gallons)\n• **Underground Cistern** - Space-saving, year-round protection\n\nYour roof can collect approximately 1,500 gallons per inch of rainfall. Austin averages 34 inches annually, so you could harvest about 51,000 gallons per year!\n\nWould you like me to dive deeper into any of these options?`,
-        attachments: [
-          {
-            type: 'poll',
-            question: 'What\'s your primary use for harvested water?',
-            options: ['Irrigation only', 'Household use', 'Emergency backup', 'All of the above']
-          }
-        ],
-        suggestions: ['Compare costs', 'Installation requirements', 'Maintenance needs', 'Local regulations']
-      },
-      'what\'s my roi timeline': {
-        message: `Excellent question! Let me break down your ROI timeline based on Austin's water rates and your property size:\n\n**Investment Analysis:**\n• System Cost: $3,200 - $4,800 (installed)\n• Annual Water Savings: $480 - $720\n• Maintenance Costs: $120/year\n• **Net Annual Savings: $360 - $600**\n\n**Payback Timeline:**\n• Conservative estimate: 6.7 years\n• Optimistic estimate: 4.4 years\n• Average: **5.5 years**\n\n**Additional Benefits:**\n• Property value increase: $2,000 - $3,500\n• Drought protection: Priceless\n• Environmental impact: 15,000 gallons/year saved`,
-        attachments: [
-          {
-            type: 'calculator',
-            title: 'Detailed ROI Calculator',
-            data: {
-              cost: '$4,000 average',
-              savings: '$600/year net'
-            }
-          }
-        ],
-        suggestions: ['Financing options', 'Tax incentives', 'System upgrades', 'Maintenance planning']
-      },
-      'find local installers': {
-        message: `I've found several certified installers in the Austin area who specialize in rainwater harvesting systems:\n\n**Top Rated Installers:**\n\n🏆 **Austin Rainwater Solutions**\n• Rating: 4.9/5 (127 reviews)\n• Specializes in residential systems\n• Free estimates, 10-year warranty\n• Distance: 8 miles from you\n\n⭐ **Texas Water Harvest Co.**\n• Rating: 4.8/5 (89 reviews)\n• Licensed & insured\n• Financing available\n• Distance: 12 miles from you\n\n🔧 **Hill Country Water Systems**\n• Rating: 4.7/5 (156 reviews)\n• 15+ years experience\n• Maintenance packages available\n• Distance: 18 miles from you\n\nWould you like me to help you schedule consultations or get quotes?`,
-        suggestions: ['Schedule consultation', 'Compare quotes', 'Check availability', 'Read reviews']
-      },
-      'seasonal maintenance tips': {
-        message: `Perfect timing! Here's your personalized seasonal maintenance guide for Austin's climate:\n\n**Winter Maintenance (Dec-Feb):**\n• Insulate exposed pipes and fittings\n• Check for freeze damage after cold snaps\n• Clean gutters of leaves and debris\n• Test pump systems monthly\n\n**Spring Preparation (Mar-May):**\n• Inspect and clean first flush diverters\n• Check tank integrity and seals\n• Test overflow systems before heavy rains\n• Schedule professional inspection\n\n**Summer Optimization (Jun-Aug):**\n• Monitor water quality in hot weather\n• Clean screens and filters monthly\n• Check for algae growth in tanks\n• Optimize irrigation schedules\n\n**Fall Readiness (Sep-Nov):**\n• Clear gutters and downspouts\n• Inspect roof and collection surfaces\n• Prepare for winter weather\n• Stock up on maintenance supplies\n\nWould you like me to set up seasonal reminders for these tasks?`,
-        suggestions: ['Set reminders', 'Maintenance checklist', 'Find supplies', 'Schedule service']
-      }
-    };
-
-    const lowerMessage = userMessage?.toLowerCase();
-    const matchedResponse = Object.keys(responses)?.find(key => 
-      lowerMessage?.includes(key?.toLowerCase())
-    );
-
-    const response = matchedResponse ? responses?.[matchedResponse] : {
-      message: `I understand you're asking about "${userMessage}". Let me help you with that!\n\nBased on your location in Austin and your interest in water sustainability, I can provide specific guidance on:\n\n• System selection and sizing\n• Cost analysis and ROI calculations\n• Local regulations and permits\n• Installation and maintenance\n• Seasonal optimization tips\n\nCould you be more specific about what aspect you'd like to explore? I'm here to make your water sustainability journey as smooth as possible!`,
-      suggestions: ['System recommendations', 'Cost analysis', 'Local requirements', 'Get started']
-    };
-
-    return {
-      id: Date.now() + 1,
-      message: response?.message,
-      isUser: false,
       timestamp: new Date(),
-      attachments: response?.attachments || [],
-      suggestions: response?.suggestions || []
     };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      // Send message to Gemini AI
+      const response = await geminiService.sendMessage(
+        messageText,
+        userContext
+      );
+
+      if (response.success) {
+        const aiResponse = {
+          id: Date.now() + 1,
+          message: response.message,
+          isUser: false,
+          timestamp: new Date(),
+          attachments: response.attachments || [],
+          suggestions: response.suggestions || [],
+        };
+
+        setMessages((prev) => [...prev, aiResponse]);
+      } else {
+        // Handle API errors gracefully
+        const errorResponse = {
+          id: Date.now() + 1,
+          message: response.message,
+          isUser: false,
+          timestamp: new Date(),
+          suggestions: response.suggestions || [
+            "Try again",
+            "Ask something else",
+          ],
+          error: true,
+        };
+
+        setMessages((prev) => [...prev, errorResponse]);
+        setError(
+          "AI service temporarily unavailable. Using fallback response."
+        );
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+
+      // Fallback response on complete failure
+      const fallbackResponse = {
+        id: Date.now() + 1,
+        message: `I apologize, but I'm having trouble connecting right now. However, I can still help you with water sustainability questions! 
+
+For immediate assistance:
+• System sizing: Most residential properties need 1,000-5,000 gallon capacity
+• Cost estimates: $2,000-$8,000 for complete systems
+• ROI timeline: Typically 3-7 years payback period
+
+Please try your question again, or contact our support team if the issue persists.`,
+        isUser: false,
+        timestamp: new Date(),
+        suggestions: [
+          "Try again",
+          "System basics",
+          "Cost information",
+          "Contact support",
+        ],
+        error: true,
+      };
+
+      setMessages((prev) => [...prev, fallbackResponse]);
+      setError("Connection error. Please check your internet and try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleStarterClick = (starterText) => {
@@ -176,24 +196,31 @@ const AIAssistantWaterBuddyInterface = () => {
   const handleSelectConversation = (conversationId) => {
     setCurrentConversationId(conversationId);
     if (conversationId === null) {
+      // Start new conversation
       setMessages([]);
+      geminiService.clearHistory(); // Reset Gemini conversation
+      setError(null);
     } else {
-      // Load conversation messages (mock data)
+      // Load conversation messages (in a real app, you'd load from database)
+      // For now, we'll simulate loading conversation
       const mockMessages = [
         {
           id: 1,
-          message: "I need help choosing a rainwater harvesting system for my home.",
+          message:
+            "I need help choosing a rainwater harvesting system for my home.",
           isUser: true,
-          timestamp: new Date(Date.now() - 3600000)
+          timestamp: new Date(Date.now() - 3600000),
         },
         {
           id: 2,
-          message: "I\'d be happy to help! Can you tell me about your property size and location?",
+          message:
+            "I'd be happy to help! Can you tell me about your property size and location?",
           isUser: false,
-          timestamp: new Date(Date.now() - 3500000)
-        }
+          timestamp: new Date(Date.now() - 3500000),
+        },
       ];
       setMessages(mockMessages);
+      // In a real implementation, you'd restore the Gemini conversation history here
     }
   };
 
@@ -203,39 +230,47 @@ const AIAssistantWaterBuddyInterface = () => {
       // Simulate voice recognition
       setTimeout(() => {
         setIsVoiceActive(false);
-        handleSendMessage("What's the best system for a 2000 square foot home?");
+        handleSendMessage(
+          "What's the best system for a 2000 square foot home?"
+        );
       }, 3000);
     }
   };
 
   const handleProactiveAction = (suggestionId, action) => {
-    console.log('Proactive action:', suggestionId, action);
-    if (action?.label === 'Show Checklist') {
-      handleSendMessage('Show me the winter maintenance checklist');
+    console.log("Proactive action:", suggestionId, action);
+    if (action?.label === "Show Checklist") {
+      handleSendMessage("Show me the winter maintenance checklist");
     }
   };
 
   const handleExpertEscalation = (formData) => {
-    console.log('Expert escalation request:', formData);
+    console.log("Expert escalation request:", formData);
     const confirmationMessage = {
       id: Date.now(),
       message: `Thank you for your expert consultation request! I've connected you with our specialist team.\n\n**Request Details:**\n• Category: ${formData?.category}\n• Urgency: ${formData?.urgency}\n• Preferred Contact: ${formData?.preferredContact}\n\nA qualified expert will contact you within the next 2-4 hours. In the meantime, I'm still here to help with any other questions!`,
       isUser: false,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
-    setMessages(prev => [...prev, confirmationMessage]);
+    setMessages((prev) => [...prev, confirmationMessage]);
   };
 
   return (
     <>
       <Helmet>
         <title>AI Assistant - WaterBuddy Interface | Rain2Recharge</title>
-        <meta name="description" content="Chat with WaterBuddy, your AI assistant for smart water sustainability decisions. Get personalized recommendations, ROI calculations, and expert guidance for rainwater harvesting systems." />
-        <meta name="keywords" content="AI assistant, water sustainability, rainwater harvesting, WaterBuddy, smart water decisions, ROI calculator" />
+        <meta
+          name="description"
+          content="Chat with WaterBuddy, your AI assistant for smart water sustainability decisions. Get personalized recommendations, ROI calculations, and expert guidance for rainwater harvesting systems."
+        />
+        <meta
+          name="keywords"
+          content="AI assistant, water sustainability, rainwater harvesting, WaterBuddy, smart water decisions, ROI calculator"
+        />
       </Helmet>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-teal-50">
         <Header />
-        
+
         <div className="pt-16 h-screen flex">
           {/* Conversation History Sidebar */}
           <ConversationHistory
@@ -248,16 +283,45 @@ const AIAssistantWaterBuddyInterface = () => {
           <div className="flex-1 flex flex-col">
             {/* Chat Header */}
             <div className="p-4 bg-white border-b border-border">
+              {error && (
+                <div className="mb-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                  <div className="flex items-center space-x-2">
+                    <Icon
+                      name="AlertTriangle"
+                      size={16}
+                      color="var(--color-warning)"
+                    />
+                    <span className="text-sm text-yellow-800">{error}</span>
+                    <button
+                      onClick={() => setError(null)}
+                      className="ml-auto text-yellow-600 hover:text-yellow-800"
+                    >
+                      <Icon name="X" size={14} />
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-teal-400 to-blue-500 rounded-full flex items-center justify-center">
                     <Icon name="Bot" size={24} color="white" />
                   </div>
                   <div>
-                    <h1 className="text-lg font-semibold text-text-primary">WaterBuddy AI Assistant</h1>
+                    <h1 className="text-lg font-semibold text-text-primary">
+                      WaterBuddy AI Assistant
+                    </h1>
                     <div className="flex items-center space-x-2 text-sm text-text-secondary">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span>Online • Responds instantly</span>
+                      <div
+                        className={`w-2 h-2 rounded-full ${
+                          error ? "bg-yellow-500" : "bg-green-500"
+                        }`}
+                      ></div>
+                      <span>
+                        {error
+                          ? "Limited functionality"
+                          : "Online • Powered by Gemini AI"}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -272,7 +336,7 @@ const AIAssistantWaterBuddyInterface = () => {
                   >
                     Expert Help
                   </Button>
-                  
+
                   <button className="p-2 text-text-secondary hover:text-text-primary hover:bg-hover rounded-lg transition-colors duration-200">
                     <Icon name="MoreVertical" size={20} />
                   </button>
@@ -297,14 +361,19 @@ const AIAssistantWaterBuddyInterface = () => {
                       timestamp={message?.timestamp}
                       attachments={message?.attachments}
                       suggestions={message?.suggestions}
-                      avatar={message?.isUser ? null : {
-                        icon: "Bot",
-                        color: "white",
-                        background: "gradient-to-br from-teal-400 to-blue-500"
-                      }}
+                      avatar={
+                        message?.isUser
+                          ? null
+                          : {
+                              icon: "Bot",
+                              color: "white",
+                              background:
+                                "gradient-to-br from-teal-400 to-blue-500",
+                            }
+                      }
                     />
                   ))}
-                  
+
                   {/* Typing Indicator */}
                   {isLoading && (
                     <div className="flex justify-start">
@@ -315,8 +384,14 @@ const AIAssistantWaterBuddyInterface = () => {
                         <div className="bg-white border border-border rounded-2xl rounded-bl-md px-4 py-3">
                           <div className="flex space-x-1">
                             <div className="w-2 h-2 bg-text-secondary rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-text-secondary rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 bg-text-secondary rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            <div
+                              className="w-2 h-2 bg-text-secondary rounded-full animate-bounce"
+                              style={{ animationDelay: "0.1s" }}
+                            ></div>
+                            <div
+                              className="w-2 h-2 bg-text-secondary rounded-full animate-bounce"
+                              style={{ animationDelay: "0.2s" }}
+                            ></div>
                           </div>
                         </div>
                       </div>
@@ -340,7 +415,7 @@ const AIAssistantWaterBuddyInterface = () => {
         <ProactiveAssistance
           userLocation="Austin, TX"
           systemType="rainwater harvesting"
-          onDismiss={(id) => console.log('Dismissed:', id)}
+          onDismiss={(id) => console.log("Dismissed:", id)}
           onAccept={handleProactiveAction}
         />
 
@@ -359,12 +434,13 @@ const AIAssistantWaterBuddyInterface = () => {
               <div className="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                 <Icon name="Mic" size={32} color="white" />
               </div>
-              <h3 className="text-lg font-semibold text-text-primary mb-2">Listening...</h3>
-              <p className="text-text-secondary mb-4">Speak your question about water sustainability</p>
-              <Button
-                variant="outline"
-                onClick={() => setIsVoiceActive(false)}
-              >
+              <h3 className="text-lg font-semibold text-text-primary mb-2">
+                Listening...
+              </h3>
+              <p className="text-text-secondary mb-4">
+                Speak your question about water sustainability
+              </p>
+              <Button variant="outline" onClick={() => setIsVoiceActive(false)}>
                 Cancel
               </Button>
             </div>
