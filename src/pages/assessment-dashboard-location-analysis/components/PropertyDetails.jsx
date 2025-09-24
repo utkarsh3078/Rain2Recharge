@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Icon from '../../../components/AppIcon';
-
+import flat_roof from '../../../assets/flat_roof.jpg';
+import metal_roof from '../../../assets/metal_roof.jpeg';
+import tile_roof from '../../../assets/tile_roof.avif';
+import thatched_roof from '../../../assets/thatched_roof.jpeg';
 
 const PropertyDetails = ({ propertyData, onPropertyUpdate }) => {
   const [selectedHouseType, setSelectedHouseType] = useState(propertyData?.houseType || '');
@@ -33,6 +36,33 @@ const PropertyDetails = ({ propertyData, onPropertyUpdate }) => {
       description: 'Rental unit in complex'
     }
   ];
+
+ const roofTypes = [
+  {
+    id: 'metal_roof',
+    name: 'Iron/Metal Roof',
+    icon: metal_roof,
+    description: 'Strong and long-lasting roof made of metal sheets.'
+  },
+  {
+    id: 'flat_roof',
+    name: 'Flat Roof',
+    icon: flat_roof,
+    description: 'Level roof surface, often used in modern designs.'
+  },
+  {
+    id: 'tile_roof',
+    name: 'Tiled Roof',
+    icon: tile_roof,
+    description: 'Roof with clay or concrete tiles for classic style.'
+  },
+  {
+    id: 'thatched_roof',
+    name: 'Thatched Roof',
+    icon: thatched_roof,
+    description: 'Eco-friendly roof made from straw or leaves.'
+  }
+];
 
   const handleHouseTypeSelect = (type) => {
     setSelectedHouseType(type);
@@ -115,6 +145,37 @@ const PropertyDetails = ({ propertyData, onPropertyUpdate }) => {
           ))}
         </div>
       </div>
+
+      {/* Roof Type Selection */}
+      <div className="space-y-4 mb-8">
+        <h4 className="text-md font-medium text-text-primary">Roof Type</h4>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {roofTypes?.map((rooftype) => (
+            <button
+              key={rooftype?.id}
+              onClick={() => handleHouseTypeSelect(rooftype?.id)}
+              className={`p-4 rounded-lg border-2 transition-all duration-200 text-left ${
+                selectedHouseType === rooftype?.id
+                  ? 'border-primary bg-primary/5' :'border-border hover:border-primary/50 hover:bg-hover'
+              }`}
+            >
+              <div className="flex items-center space-x-3">
+                <div className={`w-25 h-10 rounded-lg flex items-center justify-center ${
+                  selectedHouseType === rooftype?.id ? 'bg-primary text-white' : 'bg-muted'
+                }`}>``
+                  {/* <Icon name={type?.icon} size={20} /> */}
+                  <img src={rooftype?.icon} alt="Roof_type" className="h-[80px] w-[120px]" />
+                </div>
+                <div>
+                  <p className="font-medium text-text-primary">{rooftype?.name}</p>
+                  <p className="text-sm text-text-secondary">{rooftype?.description}</p>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Roof Size Slider */}
       <div className="space-y-4 mb-8">
         <div className="flex items-center justify-between">
@@ -141,7 +202,7 @@ const PropertyDetails = ({ propertyData, onPropertyUpdate }) => {
       {/* Lot Size Input */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h4 className="text-md font-medium text-text-primary">Lot Size</h4>
+          <h4 className="text-md font-medium text-text-primary">Available Open Space</h4>
           <span className="text-lg font-semibold text-secondary">{lotSize} acres</span>
         </div>
         <div className="space-y-2">

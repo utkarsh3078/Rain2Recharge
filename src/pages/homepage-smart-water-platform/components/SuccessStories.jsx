@@ -9,13 +9,13 @@ const SuccessStories = () => {
   const stories = [
     {
       id: 1,
-      name: "Sarah Johnson",
-      location: "Austin, Texas",
+      name: "Rohan Mishra",
+      location: "Rohini, Delhi",
       propertyType: "Single Family Home",
       beforeImage: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=400",
       afterImage: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80",
-      waterSaved: "12,450",
-      costSavings: "$2,340",
+      waterSaved: "47,120",
+      costSavings: "₹2,340",
       co2Reduced: "8.2",
       testimonial: `The Rain2Recharge assessment was incredibly detailed and easy to follow. 
       Within 6 months, we installed a complete rainwater harvesting system. 
@@ -25,13 +25,13 @@ const SuccessStories = () => {
     },
     {
       id: 2,
-      name: "Michael Chen",
-      location: "Portland, Oregon",
+      name: "Ansh Tiwari",
+      location: "Gwalior, Madhya Pradesh",
       propertyType: "Commercial Building",
       beforeImage: "https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=400",
       afterImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=400&q=80",
-      waterSaved: "45,200",
-      costSavings: "$8,900",
+      waterSaved: "1,71,080",
+      costSavings: "₹1,78,000",
       co2Reduced: "32.1",
       testimonial: `As a business owner, I needed concrete ROI data. The platform provided 
       detailed cost-benefit analysis that convinced our board. The system paid for itself 
@@ -41,13 +41,13 @@ const SuccessStories = () => {
     },
     {
       id: 3,
-      name: "Emma Rodriguez",
-      location: "Phoenix, Arizona",
+      name: "Rahul Bansal",
+      location: "Kota, Rajastan",
       propertyType: "Multi-Family Complex",
       beforeImage: "https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=400",
       afterImage: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=400&q=80",
-      waterSaved: "28,750",
-      costSavings: "$5,200",
+      waterSaved: "1,08,800",
+      costSavings: "₹1,04,000",
       co2Reduced: "19.8",
       testimonial: `Managing water costs for 24 units was challenging. The AI recommendations 
       were spot-on for our desert climate. We now have a beautiful courtyard garden that's 
@@ -141,7 +141,7 @@ const SuccessStories = () => {
                   <div className="grid grid-cols-3 gap-4">
                     <div className="text-center p-4 bg-blue-50 rounded-xl">
                       <div className="text-2xl font-bold text-blue-600">{currentData?.waterSaved}</div>
-                      <div className="text-sm text-text-secondary">Gallons Saved</div>
+                      <div className="text-sm text-text-secondary">Litres Saved</div>
                     </div>
                     <div className="text-center p-4 bg-green-50 rounded-xl">
                       <div className="text-2xl font-bold text-green-600">{currentData?.costSavings}</div>

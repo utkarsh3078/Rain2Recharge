@@ -11,20 +11,20 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
   const mockLocations = [
     {
       id: 1,
-      address: "123 Oak Street, Austin, TX 78701",
-      coordinates: { lat: 30.2672, lng: -97.7431 },
+      address: "Ladpura, Kota, Rajasthan,India 324001",
+      coordinates: { lat: 25.1737, lng: 75.8574 },
       type: "residential"
     },
     {
       id: 2,
-      address: "456 Pine Avenue, Austin, TX 78702",
-      coordinates: { lat: 30.2849, lng: -97.7341 },
+      address: " Rohini, North West Delhi, Delhi 110085 ",
+      coordinates: { lat: 28.71962, lng: 77.06618 },
       type: "residential"
     },
     {
       id: 3,
-      address: "789 Maple Drive, Austin, TX 78703",
-      coordinates: { lat: 30.2711, lng: -97.7494 },
+      address: "Jehanabad, Bihar, India 804408",
+      coordinates: { lat: 25.21893, lng: 84.99058 },
       type: "residential"
     }
   ];
@@ -37,8 +37,8 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
     setTimeout(() => {
       const mockGPSLocation = {
         id: 'gps',
-        address: "Current Location - 321 Cedar Lane, Austin, TX 78704",
-        coordinates: { lat: 30.2500, lng: -97.7500 },
+        address: "Current Location - Sector 16 C, Dwarka, New Delhi, Delhi 110078",
+        coordinates: { lat: 28.59486, lng: 77.01783 },
         type: "current"
       };
       onLocationSelect(mockGPSLocation);

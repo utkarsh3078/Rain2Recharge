@@ -11,10 +11,10 @@ const SystemRecommendations = ({ recommendations }) => {
     {
       id: 'basic-collection',
       name: 'Basic Collection System',
-      capacity: '1,500 gallons',
+      capacity: '5,600 Litres',
       complexity: 'Low',
       maintenance: 'Minimal',
-      cost: '$6,500 - $8,500',
+      cost: '₹13,000 - ₹17,000',
       installTime: '2-3 days',
       efficiency: '75%',
       image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop',
@@ -41,10 +41,10 @@ const SystemRecommendations = ({ recommendations }) => {
     {
       id: 'standard-harvesting',
       name: 'Standard Harvesting System',
-      capacity: '2,500 gallons',
+      capacity: '9,400 Litres',
       complexity: 'Medium',
       maintenance: 'Moderate',
-      cost: '$10,500 - $14,500',
+      cost: '₹21,0,000 - ₹2,90,000',
       installTime: '4-5 days',
       efficiency: '85%',
       image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop',
@@ -72,10 +72,10 @@ const SystemRecommendations = ({ recommendations }) => {
     {
       id: 'premium-integrated',
       name: 'Premium Integrated System',
-      capacity: '5,000+ gallons',
+      capacity: '18,000+ gallons',
       complexity: 'High',
       maintenance: 'Professional',
-      cost: '$18,500 - $25,000',
+      cost: '₹3,70,000 - ₹5,00,000',
       installTime: '7-10 days',
       efficiency: '95%',
       image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop',
@@ -110,7 +110,7 @@ const SystemRecommendations = ({ recommendations }) => {
       rating: 4.8,
       reviews: 127,
       specialties: ['Residential Systems', 'Smart Controls'],
-      contact: '(555) 123-4567',
+      contact: '1800-xxx-xxx',
       website: 'www.aquatech-solutions.com',
       certified: true,
       experience: '12 years'
@@ -120,7 +120,7 @@ const SystemRecommendations = ({ recommendations }) => {
       rating: 4.6,
       reviews: 89,
       specialties: ['Large Scale', 'Commercial'],
-      contact: '(555) 987-6543',
+      contact: '1800-xxx-xxx',
       website: 'www.rainharvest-pro.com',
       certified: true,
       experience: '8 years'
@@ -130,7 +130,7 @@ const SystemRecommendations = ({ recommendations }) => {
       rating: 4.7,
       reviews: 156,
       specialties: ['Eco-Friendly', 'Budget Solutions'],
-      contact: '(555) 456-7890',
+      contact: '1800-xxx-xxx',
       website: 'www.ecowater-systems.com',
       certified: true,
       experience: '15 years'
@@ -308,7 +308,7 @@ const SystemRecommendations = ({ recommendations }) => {
         </div>)
       )}
       {/* Vendor Connections */}
-      <div className="mt-8 pt-8 border-t border-border">
+      {/* <div className="mt-8 pt-8 border-t border-border">
         <h3 className="text-xl font-semibold text-text-primary mb-6">Certified Installation Partners</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {vendors?.map((vendor, index) => (
@@ -365,7 +365,7 @@ const SystemRecommendations = ({ recommendations }) => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

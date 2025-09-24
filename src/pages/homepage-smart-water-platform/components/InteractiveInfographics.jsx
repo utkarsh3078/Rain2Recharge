@@ -230,9 +230,9 @@ const InteractiveInfographics = () => {
               <p className="text-blue-100">Up to 60% reduction in water consumption</p>
             </div>
             <div className="text-center p-6 bg-white/5 rounded-xl">
-              <Icon name="DollarSign" size={32} color="var(--color-warning)" className="mx-auto mb-3" />
+              <Icon name="IndianRupee" size={32} color="var(--color-warning)" className="mx-auto mb-3" />
               <h4 className="text-lg font-semibold text-white mb-2">Cost Savings</h4>
-              <p className="text-blue-100">Average $2,000+ annual savings</p>
+              <p className="text-blue-100">Average ₹40,000+ annual savings</p>
             </div>
             <div className="text-center p-6 bg-white/5 rounded-xl">
               <Icon name="Leaf" size={32} color="var(--color-secondary)" className="mx-auto mb-3" />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
+import logo from '../../../assets/water.jpeg'
 
 const SocialSharing = ({ reportData }) => {
   const [selectedTemplate, setSelectedTemplate] = useState('impact');
@@ -71,10 +72,11 @@ const SocialSharing = ({ reportData }) => {
         <div className="relative z-10">
           <div className="flex items-center space-x-3 mb-6">
             <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
-              <Icon name="Droplets" size={24} color="white" />
+              {/* <Icon name="Droplets" size={24} color="white" /> */}
+              <img src={logo} alt="" className="h-[48px] w-[48px] rounded-md" color="var(--color-primary)"/>
             </div>
             <div>
-              <h3 className="text-xl font-bold">Rain2Recharge</h3>
+              <h3 className="text-xl font-bold text-[#FAF3E0]">Rain2Recharge</h3>
               <p className="text-white/80 text-sm">Smart Water Assessment</p>
             </div>
           </div>
@@ -89,7 +91,7 @@ const SocialSharing = ({ reportData }) => {
               <div className="text-white/80 text-sm">Feasibility Score</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold mb-1">${reportData?.costRange?.min?.toLocaleString()}</div>
+              <div className="text-3xl font-bold mb-1">₹{reportData?.costRange?.min?.toLocaleString()}</div>
               <div className="text-white/80 text-sm">Starting Cost</div>
             </div>
             <div className="text-center">
@@ -117,16 +119,35 @@ const SocialSharing = ({ reportData }) => {
     const url = window.location?.href;
     const text = encodeURIComponent(shareText);
     
+    // let shareUrl = '';
+    // switch (platform?.name) {
+    //   case 'Twitter':
+    //     shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+    //     break;
+    //   case 'Facebook':
+    //     shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
+    //     break;
+    //   case 'LinkedIn':
+    //     shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`;
+    //     break;
+    //   default:
+    //     navigator.clipboard?.writeText(`${shareText} ${url}`);
+    //     return;
+    // }
+
     let shareUrl = '';
     switch (platform?.name) {
       case 'Twitter':
-        shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+        shareUrl = "#";
         break;
       case 'Facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
+        shareUrl = "#";
         break;
       case 'LinkedIn':
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`;
+        shareUrl = "#";
+        break;
+        case 'Instagram':
+        shareUrl = "#";
         break;
       default:
         navigator.clipboard?.writeText(`${shareText} ${url}`);

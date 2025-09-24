@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Icon from '../../../components/AppIcon';
+import logo from '../../../assets/logo.png'
 
 const FeasibilityCalculator = ({ locationData, propertyData }) => {
   const [calculationResults, setCalculationResults] = useState(null);
@@ -28,8 +29,8 @@ const FeasibilityCalculator = ({ locationData, propertyData }) => {
             { name: 'Local Regulations', score: 95, impact: 'Low' }
           ],
           potential: {
-            annualCollection: 24000,
-            costSavings: 1200,
+            annualCollection: 95000,
+            costSavings: 24000,
             paybackPeriod: 3.2,
             co2Reduction: 850
           }
@@ -45,9 +46,9 @@ const FeasibilityCalculator = ({ locationData, propertyData }) => {
             { name: 'Contamination Risk', score: 85, impact: 'Medium' }
           ],
           potential: {
-            rechargeCapacity: 18000,
+            rechargeCapacity: 60000,
             aquiferBenefit: 'Medium',
-            installationCost: 8500,
+            installationCost: 17000,
             maintenanceLevel: 'Low'
           }
         }
@@ -87,7 +88,8 @@ const FeasibilityCalculator = ({ locationData, propertyData }) => {
           <div className="relative">
             <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <Icon name="Droplets" size={24} color="var(--color-primary)" />
+              {/* <Icon name="Droplets" size={24} color="var(--color-primary)" /> */}
+              <img src={logo} alt="" className="h-[45px] w-[35px]" color="var(--color-primary)"/>
             </div>
           </div>
           <p className="mt-4 text-lg font-medium text-text-primary">Analyzing Your Property</p>
@@ -178,10 +180,10 @@ const FeasibilityCalculator = ({ locationData, propertyData }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div className="text-center p-3 bg-blue-50 rounded-lg">
               <p className="text-lg font-bold text-blue-900">{calculationResults?.rainwaterHarvesting?.potential?.annualCollection?.toLocaleString()}</p>
-              <p className="text-xs text-blue-600">Gallons/Year</p>
+              <p className="text-xs text-blue-600">Litres/Year</p>
             </div>
             <div className="text-center p-3 bg-green-50 rounded-lg">
-              <p className="text-lg font-bold text-green-900">${calculationResults?.rainwaterHarvesting?.potential?.costSavings}</p>
+              <p className="text-lg font-bold text-green-900">₹{calculationResults?.rainwaterHarvesting?.potential?.costSavings}</p>
               <p className="text-xs text-green-600">Annual Savings</p>
             </div>
             <div className="text-center p-3 bg-purple-50 rounded-lg">
@@ -243,14 +245,14 @@ const FeasibilityCalculator = ({ locationData, propertyData }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             <div className="text-center p-3 bg-blue-50 rounded-lg">
               <p className="text-lg font-bold text-blue-900">{calculationResults?.groundwaterRecharge?.potential?.rechargeCapacity?.toLocaleString()}</p>
-              <p className="text-xs text-blue-600">Gallons Capacity</p>
+              <p className="text-xs text-blue-600">Litres Capacity</p>
             </div>
             <div className="text-center p-3 bg-green-50 rounded-lg">
               <p className="text-lg font-bold text-green-900">{calculationResults?.groundwaterRecharge?.potential?.aquiferBenefit}</p>
               <p className="text-xs text-green-600">Aquifer Impact</p>
             </div>
             <div className="text-center p-3 bg-orange-50 rounded-lg">
-              <p className="text-lg font-bold text-orange-900">${calculationResults?.groundwaterRecharge?.potential?.installationCost?.toLocaleString()}</p>
+              <p className="text-lg font-bold text-orange-900">₹{calculationResults?.groundwaterRecharge?.potential?.installationCost?.toLocaleString()}</p>
               <p className="text-xs text-orange-600">Install Cost</p>
             </div>
             <div className="text-center p-3 bg-teal-50 rounded-lg">
