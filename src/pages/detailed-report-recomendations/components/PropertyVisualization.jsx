@@ -18,28 +18,28 @@ const PropertyVisualization = ({ propertyData }) => {
       name: 'Gutter System',
       position: { top: '15%', left: '20%' },
       description: 'Enhanced gutter collection with leaf guards',
-      cost: '$800 - $1,200'
+      cost: '₹16,000 - ₹24,000'
     },
     {
       id: 'downspouts',
       name: 'Downspout Diverters',
       position: { top: '35%', left: '25%' },
       description: 'First-flush diverters and filtration',
-      cost: '$200 - $400'
+      cost: '₹4,000 - ₹8,000'
     },
     {
       id: 'storage',
       name: 'Storage Tank',
       position: { top: '60%', left: '70%' },
       description: '2,500 gallon underground cistern',
-      cost: '$3,500 - $5,000'
+      cost: '₹70,000 - ₹10,000'
     },
     {
       id: 'infiltration',
       name: 'Infiltration Basin',
       position: { top: '75%', left: '40%' },
       description: 'Bioswale for groundwater recharge',
-      cost: '$1,500 - $2,500'
+      cost: '₹30,000 - ₹50,000'
     }
   ];
 

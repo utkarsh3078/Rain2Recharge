@@ -42,7 +42,7 @@ const NavigationControls = ({
             </Button>
           )}
           
-          <Button
+          {/* <Button
             variant="ghost"
             onClick={handleSaveAndExit}
             iconName="Save"
@@ -50,7 +50,7 @@ const NavigationControls = ({
             className="text-text-secondary hover:text-text-primary"
           >
             Save & Exit
-          </Button>
+          </Button> */}
         </div>
 
         {/* Center - Step Information */}

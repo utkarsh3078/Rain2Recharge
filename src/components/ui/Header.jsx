@@ -78,7 +78,7 @@ const Header = () => {
         2) Put your image in `src/assets/` and import it at the top, e.g.
          `import LogoImg from '../../assets/logo.png'` then use `src={LogoImg}`.
         Example uses the existing `react.svg` placeholder. */}
-      <Image src={LogoImg} alt="Rain2Recharge logo" className="w-39 h-14" />
+      <Image src={LogoImg} alt="Rain2Recharge logo" className="w-39 h-11" />
         </div>
         {/* <div className="absolute -top-1 -right-1 w-4 h-4 bg-secondary rounded-full flex items-center justify-center">
           <Icon name="Zap" size={10} color="white" strokeWidth={3} /> 

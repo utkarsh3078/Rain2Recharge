@@ -11,11 +11,32 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
   const [locationError, setLocationError] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
 
+<<<<<<< HEAD
   // Handle address search with debouncing
   const handleAddressSearch = async (query) => {
     if (!query.trim()) {
       setSearchResults([]);
       return;
+=======
+  const mockLocations = [
+    {
+      id: 1,
+      address: "Ladpura, Kota, Rajasthan,India 324001",
+      coordinates: { lat: 25.1737, lng: 75.8574 },
+      type: "residential"
+    },
+    {
+      id: 2,
+      address: " Rohini, North West Delhi, Delhi 110085 ",
+      coordinates: { lat: 28.71962, lng: 77.06618 },
+      type: "residential"
+    },
+    {
+      id: 3,
+      address: "Jehanabad, Bihar, India 804408",
+      coordinates: { lat: 25.21893, lng: 84.99058 },
+      type: "residential"
+>>>>>>> 3b1c99dce1662e78ef5792ed042b1dc8c30490aa
     }
 
     try {
@@ -30,11 +51,24 @@ const LocationInput = ({ onLocationSelect, selectedLocation }) => {
   const handleGPSLocation = () => {
     setIsUsingGPS(true);
     setShowPrivacyMessage(true);
+<<<<<<< HEAD
     setLocationError(null);
 
     // Check if geolocation is supported
     if (!navigator.geolocation) {
       setLocationError("Geolocation is not supported by this browser.");
+=======
+    
+    // Mock GPS detection
+    setTimeout(() => {
+      const mockGPSLocation = {
+        id: 'gps',
+        address: "Current Location - Sector 16 C, Dwarka, New Delhi, Delhi 110078",
+        coordinates: { lat: 28.59486, lng: 77.01783 },
+        type: "current"
+      };
+      onLocationSelect(mockGPSLocation);
+>>>>>>> 3b1c99dce1662e78ef5792ed042b1dc8c30490aa
       setIsUsingGPS(false);
       setShowPrivacyMessage(false);
       return;

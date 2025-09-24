@@ -68,7 +68,7 @@ const AssessmentLauncher = () => {
                   <Input
                     label="Enter your address or zip code"
                     type="text"
-                    placeholder="123 Main St, City, State 12345"
+                    placeholder="Sector 16 C, Dwarka, New Delhi, Delhi 110078"
                     value={formData?.location}
                     onChange={(e) => handleInputChange('location', e?.target?.value)}
                     className="w-full"

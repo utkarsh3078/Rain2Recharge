@@ -120,7 +120,7 @@ const AIAssistantPreview = () => {
                 </Button>
               </Link>
               
-              <Button 
+              {/* <Button 
                 variant="outline" 
                 size="lg"
                 className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50"
@@ -128,7 +128,7 @@ const AIAssistantPreview = () => {
                 iconPosition="left"
               >
                 Watch Demo
-              </Button>
+              </Button> */}
             </div>
           </div>
 
@@ -190,6 +190,7 @@ const AIAssistantPreview = () => {
                 <div className="flex items-center space-x-2">
                   <div className="flex-1 bg-gray-100 rounded-full px-4 py-2">
                     <span className="text-sm text-text-secondary">Ask WaterBuddy anything...</span>
+                    {/* <textarea placeholder="Ask WaterBuddy anything..." className="design-none"/> */}
                   </div>
                   <button className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center">
                     <Icon name="Send" size={16} color="white" />
@@ -202,9 +203,9 @@ const AIAssistantPreview = () => {
             <div className="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle">
               <Icon name="Sparkles" size={24} color="var(--color-accent)" />
             </div>
-            <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-white rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle" style={{ animationDelay: '1s' }}>
+            {/* <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-white rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle" style={{ animationDelay: '1s' }}>
               <Icon name="MessageCircle" size={20} color="var(--color-primary)" />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -153,7 +153,7 @@ const AssessmentDashboard = () => {
             <div className="text-center mb-8">
               <div className="flex items-center justify-center space-x-3 mb-4">
                 <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center shadow-brand">
-                  <Icon name="BarChart3" size={24} color="white" />
+                  <Icon name="BarChart3" size={24} color="blue" />
                 </div>
                 <h1 className="text-3xl md:text-4xl font-bold text-text-primary">
                   Water Assessment Dashboard
@@ -324,7 +324,7 @@ const AssessmentDashboard = () => {
                   </p>
                   <div className="space-y-2">
                     <button className="w-full text-left p-2 text-sm text-primary hover:bg-primary/5 rounded-lg transition-colors duration-200">
-                      📞 Call: (555) 123-WATER
+                      📞 Call: +91 XXXXX XXXXX
                     </button>
                     <button className="w-full text-left p-2 text-sm text-primary hover:bg-primary/5 rounded-lg transition-colors duration-200">
                       ✉️ Email: support@rain2recharge.com

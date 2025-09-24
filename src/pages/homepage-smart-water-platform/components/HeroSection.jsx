@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
-// import water from 
+import logo from '../../../assets/logo.png'
+import RWH from '../../../assets/RWH.jpg'
+import AR from '../../../assets/AR.jpeg'
+ 
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -18,14 +21,16 @@ const HeroSection = () => {
 
   const slides = [
     {
-      title: "Drought-Affected Landscape",
-      description: "Traditional water management challenges",
-      image: "https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800"
+      title: "Rooftop Rainwater Harvesting",
+      description: "Collecting and storing rainwater for sustainable water use",
+      // image: "https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=800"
+      image : RWH
     },
     {
-      title: "Thriving Rainwater System",
-      description: "Smart water harvesting solutions",
-      image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+      title: "Artificial Recharge Pit",
+      description: "Rainwater harvesting recharge pit for groundwater restoration",
+      // image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80"
+      image : AR
     }
   ];
 
@@ -42,9 +47,11 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className={`space-y-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="space-y-6">
-              <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-blue-200">
-                <Icon name="Droplets" size={20} color="var(--color-primary)" />
-                <span className="text-sm font-medium text-primary">Smart Water Solutions</span>
+              
+              <div className="inline-flex items-center space-x-2 bg-white/80     backdrop-blur-sm px-4 py-2 rounded-full border border-blue-200">
+                {/* <Icon name="Droplets" size={20} color="var(--color-primary)" /> */}
+                <img src={logo} alt="" className="h-[30px] w-[25px]" color="var(--color-primary)"/>
+                <span className="text-lg font-medium text-primary">Smart Water Solutions</span>
               </div>
               
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-text-primary leading-tight">
@@ -74,7 +81,7 @@ const HeroSection = () => {
                 </Button>
               </Link>
               
-              <Button 
+              {/* <Button 
                 variant="outline" 
                 size="lg"
                 className="border-2 border-teal-500 text-teal-600 hover:bg-teal-50 transition-all duration-300"
@@ -82,11 +89,11 @@ const HeroSection = () => {
                 iconPosition="left"
               >
                 Calculate Impact
-              </Button>
+              </Button> */}
             </div>
 
             {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-4">
+            {/* <div className="flex flex-wrap items-center gap-6 pt-4">
               <div className="flex items-center space-x-2">
                 <Icon name="Shield" size={20} color="var(--color-success)" />
                 <span className="text-sm text-text-secondary">EPA Certified</span>
@@ -99,8 +106,9 @@ const HeroSection = () => {
                 <Icon name="Users" size={20} color="var(--color-success)" />
                 <span className="text-sm text-text-secondary">10,000+ Users</span>
               </div>
-            </div>
+            </div> */}
           </div>
+
 
           {/* Right Visual */}
           <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
@@ -119,7 +127,7 @@ const HeroSection = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   <div className="absolute bottom-6 left-6 text-white">
-                    <h3 className="text-xl font-semibold mb-2">{slide?.title}</h3>
+                    <h3 className="text-xl text-[#FAF3E0] font-semibold mb-2">{slide?.title}</h3>
                     <p className="text-white/90">{slide?.description}</p>
                   </div>
                 </div>
@@ -142,7 +150,8 @@ const HeroSection = () => {
             {/* Floating Elements */}
             <div className="absolute -top-4 -right-4 w-20 h-20 bg-white rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle">
               {/* <Image src={water} alt="Rain2Recharge logo" className="" /> */}
-              <Icon name="Droplets" size={48} color="var(--color-primary)" />
+              {/* <Icon name="Droplets" size={48} color="var(--color-primary)" /> */}
+              <img src={logo} alt="" className="h-[55px] w-[45px]" color="var(--color-primary)"/>
             </div>
             {/* <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-secondary rounded-full shadow-brand flex items-center justify-center animate-pulse-gentle" style={{ animationDelay: '1s' }}>
               <Icon name="Leaf" size={24} color="white" />
@@ -151,6 +160,7 @@ const HeroSection = () => {
         </div>
       </div>
       {/* Water Flow Animation */}
+      <br />
       <div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-blue-400 via-teal-400 to-green-400 opacity-60">
         <div className="h-full bg-white/30 animate-flow"></div>
       </div>
