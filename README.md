@@ -1,4 +1,5 @@
-# SIH PROJECT
+##Rain2Recharge
+SIH PROJECT
 
 A modern React-based project utilizing the latest frontend technologies and tools for building responsive web applications.
 
@@ -97,9 +98,3 @@ Build the application for production:
 ```bash
 npm run build
 ```
-
-## 🙏 Acknowledgments
-
-- Built with [Rocket.new](https://rocket.new)
-- Powered by React and Vite
-- Styled with Tailwind CSS
