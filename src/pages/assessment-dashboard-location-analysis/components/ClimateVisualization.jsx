@@ -156,7 +156,7 @@ const ClimateVisualization = ({ locationData }) => {
             <Icon name="CloudRain" size={16} color="var(--color-primary)" />
             <span className="text-sm font-medium text-blue-800">Annual Rainfall</span>
           </div>
-          <p className="text-2xl font-bold text-blue-900">38.6"</p>
+          <p className="text-2xl font-bold text-blue-900">980 mm</p>
           <p className="text-sm text-blue-600">+12% above average</p>
         </div>
 
@@ -174,8 +174,8 @@ const ClimateVisualization = ({ locationData }) => {
             <Icon name="Droplets" size={16} color="var(--color-success)" />
             <span className="text-sm font-medium text-green-800">Collection Potential</span>
           </div>
-          <p className="text-2xl font-bold text-green-900">24,000</p>
-          <p className="text-sm text-green-600">gallons annually</p>
+          <p className="text-2xl font-bold text-green-900">90,000</p>
+          <p className="text-sm text-green-600">Litres annually</p>
         </div>
       </div>
       {/* Climate Insights */}
@@ -187,7 +187,7 @@ const ClimateVisualization = ({ locationData }) => {
             <ul className="text-yellow-700 space-y-1">
               <li>• Peak collection months: April-May and September</li>
               <li>• Summer water demand exceeds collection by 40%</li>
-              <li>• Storage capacity of 2,500+ gallons recommended</li>
+              <li>• Storage capacity of 10,000+ Litres recommended</li>
               <li>• Drought-resistant landscaping could reduce demand by 25%</li>
             </ul>
           </div>

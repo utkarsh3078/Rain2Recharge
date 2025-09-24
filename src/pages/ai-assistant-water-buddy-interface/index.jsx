@@ -70,8 +70,8 @@ const AIAssistantWaterBuddyInterface = () => {
           type: 'calculator',
           title: 'Quick ROI Calculator',
           data: {
-            cost: '$3,200 - $4,800',
-            savings: '$480/year'
+            cost: '₹64,000 - ₹96,000',
+            savings: '₹9,600/year'
           }
         }
       ],

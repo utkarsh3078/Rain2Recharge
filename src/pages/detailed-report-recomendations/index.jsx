@@ -27,7 +27,7 @@ const DetailedReportRecommendations = () => {
     propertyId: 'PROP-2024-001',
     assessmentDate: new Date()?.toLocaleDateString(),
     location: {
-      address: "1234 Maple Street, Austin, TX 78701",
+      address: "Sector 16 C, Dwarka, New Delhi, Delhi 110078",
       coordinates: { lat: 30.2672, lng: -97.7431 },
       zone: "Central Texas Hill Country"
     }
@@ -81,9 +81,9 @@ const DetailedReportRecommendations = () => {
 
   const navigationSections = [
     { id: 'summary', label: 'Executive Summary', icon: 'FileText' },
-    { id: 'visualization', label: 'Property View', icon: 'Eye' },
+    // { id: 'visualization', label: 'Property View', icon: 'Eye' },
     { id: 'analysis', label: 'Detailed Analysis', icon: 'BarChart3' },
-    { id: 'cost-benefit', label: 'Cost Analysis', icon: 'DollarSign' },
+    { id: 'cost-benefit', label: 'Cost Analysis', icon: 'IndianRupee' },
     { id: 'recommendations', label: 'Recommendations', icon: 'CheckCircle' },
     { id: 'roadmap', label: 'Implementation', icon: 'Map' },
     { id: 'sharing', label: 'Share Impact', icon: 'Share2' }
@@ -149,12 +149,12 @@ const DetailedReportRecommendations = () => {
               <Icon name="Download" size={16} className="mr-2" />
               Download PDF Report
             </Button>
-            <Link to="/solution-marketplace-vendor-directory">
+            {/* <Link to="/solution-marketplace-vendor-directory">
               <Button variant="outline">
                 <Icon name="Store" size={16} className="mr-2" />
                 Find Contractors
               </Button>
-            </Link>
+            </Link> */}
             <Link to="/ai-assistant-water-buddy-interface">
               <Button variant="secondary">
                 <Icon name="Bot" size={16} className="mr-2" />
@@ -169,7 +169,7 @@ const DetailedReportRecommendations = () => {
         isSticky ? 'shadow-soft' : ''
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex space-x-1 py-4 overflow-x-auto">
+          <nav className="flex space-x-1 py-4 overflow-x-auto justify-between">
             {navigationSections?.map((section) => (
               <button
                 key={section?.id}
@@ -195,9 +195,9 @@ const DetailedReportRecommendations = () => {
         </section>
 
         {/* Property Visualization */}
-        <section id="visualization">
+        {/* <section id="visualization">
           <PropertyVisualization propertyData={propertyData} />
-        </section>
+        </section> */}
 
         {/* Detailed Analysis */}
         <section id="analysis">
@@ -231,7 +231,7 @@ const DetailedReportRecommendations = () => {
           <p className="text-xl text-white/90 mb-8">
             Connect with certified contractors and begin your water sustainability journey today
           </p>
-          <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+          {/* <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Link to="/solution-marketplace-vendor-directory">
               <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-gray-100">
                 <Icon name="Users" size={20} className="mr-2" />
@@ -244,7 +244,7 @@ const DetailedReportRecommendations = () => {
                 Get Expert Guidance
               </Button>
             </Link>
-          </div>
+          </div> */}
         </div>
       </section>
       {/* Footer */}

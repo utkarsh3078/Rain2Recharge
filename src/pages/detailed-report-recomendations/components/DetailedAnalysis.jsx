@@ -12,37 +12,37 @@ const DetailedAnalysis = ({ analysisData }) => {
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
       data: {
-        annualRainfall: '42.5 inches',
+        annualRainfall: '1075 mm',
         captureEfficiency: '85%',
         roofArea: '2,400 sq ft',
-        potentialCapture: '54,000 gallons/year',
+        potentialCapture: '204K Litres/year',
         seasonalBreakdown: [
-          { season: 'Spring', rainfall: '12.8"', capture: '16,320 gal' },
-          { season: 'Summer', rainfall: '8.2"', capture: '10,455 gal' },
-          { season: 'Fall', rainfall: '11.5"', capture: '14,670 gal' },
-          { season: 'Winter', rainfall: '10.0"', capture: '12,750 gal' }
+          { season: 'Spring', rainfall: '325 mm', capture: '61K Litres' },
+          { season: 'Summer', rainfall: '205 mm', capture: '39K Litres' },
+          { season: 'Fall', rainfall: '290 mm', capture: '55K Litres' },
+          { season: 'Winter', rainfall: '250 mm"', capture: '48K Litres' }
         ]
       }
     },
-    {
-      id: 'soil',
-      title: 'Soil Infiltration Analysis',
-      icon: 'Mountain',
-      color: 'text-amber-600',
-      bgColor: 'bg-amber-50',
-      data: {
-        soilType: 'Sandy Loam',
-        infiltrationRate: '2.5 inches/hour',
-        permeability: 'High',
-        seasonalVariation: 'Moderate',
-        recommendations: [
-          'Excellent natural drainage capacity',
-          'Minimal soil amendments required',
-          'Consider bioswales for enhanced infiltration',
-          'Monitor during wet seasons for saturation'
-        ]
-      }
-    },
+    // {
+    //   id: 'soil',
+    //   title: 'Soil Infiltration Analysis',
+    //   icon: 'Mountain',
+    //   color: 'text-amber-600',
+    //   bgColor: 'bg-amber-50',
+    //   data: {
+    //     soilType: 'Sandy Loam',
+    //     infiltrationRate: '2.5 inches/hour',
+    //     permeability: 'High',
+    //     seasonalVariation: 'Moderate',
+    //     recommendations: [
+    //       'Excellent natural drainage capacity',
+    //       'Minimal soil amendments required',
+    //       'Consider bioswales for enhanced infiltration',
+    //       'Monitor during wet seasons for saturation'
+    //     ]
+    //   }
+    // },
     {
       id: 'regulatory',
       title: 'Regulatory Compliance',
@@ -51,7 +51,7 @@ const DetailedAnalysis = ({ analysisData }) => {
       bgColor: 'bg-green-50',
       data: {
         permits: 'Building permit required',
-        incentives: '$2,500 rebate available',
+        incentives: '₹50,000 rebate available',
         restrictions: 'None identified',
         timeline: '4-6 weeks processing',
         requirements: [
@@ -71,7 +71,7 @@ const DetailedAnalysis = ({ analysisData }) => {
       data: {
         bestInstallTime: 'Late Spring (April-May)',
         maintenanceSchedule: 'Quarterly inspections',
-        winterPrep: 'Drain system below 32°F',
+        winterPrep: 'Drain system below 0°C',
         peakEfficiency: 'Fall and Spring seasons',
         strategies: [
           'Install before rainy season for maximum benefit',

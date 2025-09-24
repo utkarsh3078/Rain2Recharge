@@ -21,9 +21,9 @@ const ExecutiveSummary = ({ reportData }) => {
     },
     {
       title: "Investment Range",
-      value: `$${reportData?.costRange?.min?.toLocaleString()} - $${reportData?.costRange?.max?.toLocaleString()}`,
+      value: `₹${reportData?.costRange?.min?.toLocaleString()} - ₹${reportData?.costRange?.max?.toLocaleString()}`,
       unit: "",
-      icon: "DollarSign",
+      icon: "IndianRupee",
       color: "text-secondary",
       bgColor: "bg-secondary/10"
     },

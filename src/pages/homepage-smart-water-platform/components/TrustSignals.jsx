@@ -31,22 +31,22 @@ const TrustSignals = () => {
 
   const partnerships = [
     {
-      name: "National Water Association",
+      name: "India Water Resources Information System",
       type: "Professional Partnership",
       icon: "Users"
     },
     {
-      name: "Green Building Council",
+      name: "Central Ground Water Control Board",
       type: "Sustainability Partner",
       icon: "Building"
     },
+    // {
+    //   name: "Environmental Protection Agency",
+    //   type: "Government Partnership",
+    //   icon: "Shield"
+    // },
     {
-      name: "Environmental Protection Agency",
-      type: "Government Partnership",
-      icon: "Shield"
-    },
-    {
-      name: "Water Research Foundation",
+      name: "⁠Climate Researh and Services, Pune",
       type: "Research Collaboration",
       icon: "BookOpen"
     }
@@ -94,7 +94,7 @@ const TrustSignals = () => {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        {/* <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mb-4">
             Trusted by Industry Leaders
           </h2>
@@ -102,10 +102,10 @@ const TrustSignals = () => {
             Our platform is certified, recognized, and trusted by environmental organizations, 
             government agencies, and sustainability experts worldwide.
           </p>
-        </div>
+        </div> */}
 
         {/* Certifications */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <h3 className="text-2xl font-semibold text-text-primary text-center mb-8">
             Environmental Certifications
           </h3>
@@ -123,7 +123,7 @@ const TrustSignals = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Partnerships */}
         <div className="mb-16">
@@ -149,7 +149,7 @@ const TrustSignals = () => {
         </div>
 
         {/* Media Recognition */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <h3 className="text-2xl font-semibold text-text-primary text-center mb-8">
             Media Recognition
           </h3>
@@ -178,10 +178,11 @@ const TrustSignals = () => {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
+
 
         {/* Security & Privacy */}
-        <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl p-8 lg:p-12">
+        {/* <div className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-3xl p-8 lg:p-12">
           <div className="text-center mb-8">
             <h3 className="text-2xl font-semibold text-text-primary mb-4">
               Security & Privacy First
@@ -213,7 +214,7 @@ const TrustSignals = () => {
               All user data is encrypted, anonymized, and never shared with third parties
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

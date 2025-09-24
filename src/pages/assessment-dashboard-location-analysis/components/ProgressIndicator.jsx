@@ -18,7 +18,7 @@ const ProgressIndicator = ({ currentStep, totalSteps, stepLabels }) => {
         <h3 className="text-lg font-semibold text-text-primary">Assessment Progress</h3>
         <div className="flex items-center space-x-2">
           <div className="flex items-center space-x-1">
-            {[...Array(3)]?.map((_, i) => (
+            {[...Array(totalSteps)]?.map((_, i) => (
               <div
                 key={i}
                 className="w-2 h-2 bg-primary rounded-full animate-pulse"
@@ -110,3 +110,4 @@ const ProgressIndicator = ({ currentStep, totalSteps, stepLabels }) => {
 };
 
 export default ProgressIndicator;
+

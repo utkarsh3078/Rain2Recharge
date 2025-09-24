@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
+import logo from '../../../assets/water.jpeg' 
 
 const Footer = () => {
   const currentYear = new Date()?.getFullYear();
@@ -45,11 +46,11 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { name: "Twitter", icon: "Twitter", url: "https://twitter.com/rain2recharge" },
-    { name: "LinkedIn", icon: "Linkedin", url: "https://linkedin.com/company/rain2recharge" },
-    { name: "Facebook", icon: "Facebook", url: "https://facebook.com/rain2recharge" },
-    { name: "Instagram", icon: "Instagram", url: "https://instagram.com/rain2recharge" },
-    { name: "YouTube", icon: "Youtube", url: "https://youtube.com/rain2recharge" }
+    { name: "Twitter", icon: "Twitter", url: "#" },
+    { name: "LinkedIn", icon: "Linkedin", url: "#" },
+    { name: "Facebook", icon: "Facebook", url: "#" },
+    { name: "Instagram", icon: "Instagram", url: "#" },
+    { name: "YouTube", icon: "Youtube", url: "#" }
   ];
 
   const legalLinks = [
@@ -70,11 +71,12 @@ const Footer = () => {
               <Link to="/homepage-smart-water-platform" className="flex items-center space-x-3 group">
                 <div className="relative">
                   <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center shadow-brand transition-all duration-300 group-hover:shadow-brand-lg group-hover:scale-105">
-                    <Icon name="Droplets" size={28} color="white" strokeWidth={2.5} />
+                    {/* <Icon name="Droplets" size={28} color="white" strokeWidth={2.5} /> */}
+                    <img src={logo} alt="" className="h-[48px] w-[48px] rounded-md" color="var(--color-primary)"/>
                   </div>
-                  <div className="absolute -top-1 -right-1 w-5 h-5 bg-secondary rounded-full flex items-center justify-center">
+                  {/* <div className="absolute -top-1 -right-1 w-5 h-5 bg-secondary rounded-full flex items-center justify-center">
                     <Icon name="Zap" size={12} color="white" strokeWidth={3} />
-                  </div>
+                  </div> */}
                 </div>
                 <div className="flex flex-col">
                   <span className="text-2xl font-bold text-white tracking-tight">
@@ -100,11 +102,11 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <Icon name="Phone" size={18} color="var(--color-accent)" />
-                  <span className="text-slate-300">1-800-RAIN-2-R (1-800-724-6247)</span>
+                  <span className="text-slate-300">+91 xxxxx xxxxx</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Icon name="MapPin" size={18} color="var(--color-accent)" />
-                  <span className="text-slate-300">San Francisco, CA • Austin, TX</span>
+                  <span className="text-slate-300">Sector 16 C, Dwarka, New Delhi, Delhi 110078</span>
                 </div>
               </div>
 
